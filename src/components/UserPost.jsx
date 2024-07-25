@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom'
 import zuckerbergAvatar from '../public/zuck-avatar.png'
 import verified from '../public/verified.png'
 import { BsThreeDots } from 'react-icons/bs'
+import post1 from '../public/post1.png'
+import Actions from '../components/Actions'
+import { useState } from 'react'
 
-const UserPost = () => {
+const UserPost = ({ postImg, likes, replies, postTitle }) => {
+  const [liked, setLiked] = useState(false)
   return (
     <Link to={'/markzuckerberg/post/1'}>
       <Flex gap={3} mb={4} py={5}>
@@ -55,6 +59,29 @@ const UserPost = () => {
               </Text>
               <BsThreeDots />
             </Flex>
+          </Flex>
+          <Text fontSize={'sm'}>{postTitle}</Text>
+          {postImg ? (
+            <Box
+              borderRadius={6}
+              overflow={'hidden'}
+              border={'1px solid'}
+              borderColor={'gray.light'}
+            >
+              <Image w={'full'} src={postImg} />
+            </Box>
+          ) : null}
+          <Flex gap={3} my={1}>
+            <Actions liked={liked} setLiked={setLiked} />
+          </Flex>
+          <Flex gap={2} alignItems={'center'}>
+            <Text color={'gray.light'} fontSize={'sm'}>
+              {replies} replies
+            </Text>
+            <Box h={0.5} w={0.5} borderRadius={'full'} bg={'gray.light'}></Box>
+            <Text color={'gray.light'} fontSize={'sm'}>
+              {likes} likes
+            </Text>
           </Flex>
         </Flex>
       </Flex>
